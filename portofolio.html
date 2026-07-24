@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio — Mochammad Fathir Reza Fahresi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    display: ['Space Grotesk', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        background: '#03040B',
+                        brand: { blue: '#3b82f6', purple: '#8B5CF6', cyan: '#06b6d4' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: rgba(139,92,246,0.4) transparent; }
+        body { background: #03040B; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.4); border-radius: 3px; }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text-brand {
+            background: linear-gradient(135deg, #3b82f6 0%, #8B5CF6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-2deg); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; transform: scale(1); filter: blur(80px); }
+            50% { opacity: 0.6; transform: scale(1.1); filter: blur(100px); }
+        }
+        @keyframes reveal-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes reveal-left {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes reveal-right {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes reveal-scale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes spin-slow {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes dash-move {
+            to { stroke-dashoffset: -20; }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #8B5CF6; }
+        }
+        @keyframes count-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes progress-fill {
+            from { width: 0%; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+        }
+
+        .animate-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-reveal.visible { opacity: 1; transform: translateY(0); }
+        .animate-reveal-left { opacity: 0; transform: translateX(-60px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .animate-reveal-right { opacity: 0; transform: translateX(60px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .animate-reveal-scale { opacity: 0; transform: scale(0.8); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+        /* Profile Image */
+        .profile-ring {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-ring::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #3b82f6, #8B5CF6, #06b6d4, #3b82f6);
+            animation: spin-slow 6s linear infinite;
+            z-index: -1;
+        }
+        .profile-ring::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #3b82f6, #8B5CF6, #06b6d4, #3b82f6);
+            animation: spin-slow 6s linear infinite;
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -2;
+        }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #03040B;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Skill Bar */
+        .skill-bar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 999px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #3b82f6, #8B5CF6, #06b6d4);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .skill-bar-fill.active { width: var(--fill-width); }
+
+        /* Gallery */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139,92,246,0.3);
+            box-shadow: 0 20px 60px rgba(139,92,246,0.15);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(3,4,11,0.95) 0%, rgba(3,4,11,0.4) 50%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* Achievement Card */
+        .achievement-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .achievement-card:hover {
+            border-color: rgba(234,179,8,0.3);
+            box-shadow: 0 20px 60px rgba(234,179,8,0.1);
+            transform: translateY(-6px);
+        }
+        .achievement-card img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .achievement-card:hover img { transform: scale(1.05); }
+
+        /* Nav Active */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8B5CF6);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: #fff; }
+
+        /* Floating Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse-glow 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+        }
+
+        /* Orbit Dots */
+        .orbit-container {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            pointer-events: none;
+        }
+        .orbit-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            margin: -4px 0 0 -4px;
+        }
+        .orbit-dot:nth-child(1) { animation: orbit 12s linear infinite; background: #3b82f6; box-shadow: 0 0 12px rgba(59,130,246,0.6); }
+        .orbit-dot:nth-child(2) { animation: orbit 12s linear infinite; animation-delay: -4s; background: #8B5CF6; box-shadow: 0 0 12px rgba(139,92,246,0.6); }
+        .orbit-dot:nth-child(3) { animation: orbit 12s linear infinite; animation-delay: -8s; background: #06b6d4; box-shadow: 0 0 12px rgba(6,182,212,0.6); }
+
+        /* Tooltip */
+        .tooltip-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+        }
+        .tooltip-tag:hover {
+            border-color: rgba(139,92,246,0.3);
+            background: rgba(139,92,246,0.08);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(3,4,11,0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .lightbox.active { opacity: 1; pointer-events: all; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .lightbox.active img { transform: scale(1); }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(59,130,246,0.5), rgba(139,92,246,0.5), rgba(6,182,212,0.5));
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 14px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #8B5CF6;
+            border: 3px solid #03040B;
+            box-shadow: 0 0 12px rgba(139,92,246,0.6);
+        }
+
+        /* Particle Canvas */
+        #particles-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Particles Background -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Background Orbs -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div class="orb" style="width:600px;height:600px;top:-200px;right:-200px;background:rgba(59,130,246,0.08);filter:blur(120px);animation-delay:0s;"></div>
+    <div class="orb" style="width:500px;height:500px;bottom:-150px;left:-150px;background:rgba(139,92,246,0.08);filter:blur(100px);animation-delay:3s;"></div>
+    <div class="orb" style="width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(6,182,212,0.05);filter:blur(90px);animation-delay:5s;"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue via-brand-purple to-brand-cyan flex items-center justify-center text-white font-display font-bold text-lg group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
+                F
+            </div>
+            <span class="font-display font-semibold text-white text-lg hidden sm:block">Fathir<span class="text-brand-purple">.dev</span></span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-1 bg-[#03040B]/40 backdrop-blur-xl px-2 py-2 rounded-full border border-white/5">
+            <a href="#home" class="nav-link active px-5 py-2 rounded-full text-sm font-medium text-white/60 hover:text-white transition-colors" data-section="home">Home</a>
+            <a href="#profile" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-white/60 hover:text-white transition-colors" data-section="profile">Profile</a>
+            <a href="#skills" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-white/60 hover:text-white transition-colors" data-section="skills">Skill</a>
+            <a href="#achievement" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-white/60 hover:text-white transition-colors" data-section="achievement">Achievement</a>
+        </div>
+
+        <!-- CTA Button Desktop -->
+        <a href="#profile" class="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white text-black text-xs font-bold tracking-wide rounded-full hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 hover:-translate-y-0.5">
+            <span>CONTACT ME</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 z-50 bg-[#03040B]/95 backdrop-blur-xl border-l border-white/5 p-8 flex flex-col gap-6">
+    <button id="menu-close" class="self-end w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all">
+        <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+    <div class="flex flex-col gap-2 mt-4">
+        <a href="#home" class="mobile-nav-link px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-lg font-medium">Home</a>
+        <a href="#profile" class="mobile-nav-link px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-lg font-medium">Profile</a>
+        <a href="#skills" class="mobile-nav-link px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-lg font-medium">Skill</a>
+        <a href="#achievement" class="mobile-nav-link px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-lg font-medium">Achievement</a>
+    </div>
+    <div class="mt-auto">
+        <a href="#profile" class="flex items-center justify-center gap-2 px-6 py-3 bg-white text-black text-sm font-bold tracking-wide rounded-full">
+            <span>CONTACT ME</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+    </div>
+</div>
+<div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<!-- ===================== HOME SECTION ===================== -->
+<section id="home" class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <!-- Orbit Animation -->
+    <div class="orbit-container hidden lg:block" style="top:50%;left:50%;transform:translate(-50%,-50%);">
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 mb-8" style="animation: reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both;">
+            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            <span class="text-xs font-medium text-white/60 tracking-wide">SMK PLUS PELITA NUSANTARA — TKJ</span>
+        </div>
+
+        <!-- Profile Image -->
+        <div class="flex justify-center mb-8" style="animation: reveal-scale 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both;">
+            <div class="profile-ring">
+                <img src="https://i.ibb.co.com/xtR2g2jr/Gemini-Generated-Image-yxl3dyyxl3dyyxl3.png" alt="Mochammad Fathir Reza Fahresi" class="profile-img">
+            </div>
+        </div>
+
+        <!-- Name -->
+        <h1 class="font-display font-medium text-5xl sm:text-6xl lg:text-8xl tracking-tighter leading-none mb-6" style="animation: reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s both;">
+            <span class="gradient-text">Halo, Saya</span><br>
+            <span class="gradient-text-brand">Mochammad Fathir</span><br>
+            <span class="gradient-text-brand">Reza Fahresi!</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl font-light text-white/50 max-w-2xl mx-auto mb-4 leading-relaxed" style="animation: reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s both;">
+            Siswa <span class="text-white/80 font-medium">Teknik Komputer & Jaringan</span>
+        </p>
+        <p class="text-base font-light text-white/40 max-w-xl mx-auto mb-10 leading-relaxed" style="animation: reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.6s both;">
+            Siswa SMK yang berdedikasi, berfokus pada infrastruktur jaringan, pembuatan web server, dan perawatan mesin, serta siap berkontribusi secara profesional di industri.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="animation: reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.7s both;">
+            <a href="#profile" class="group flex items-center gap-3 px-8 py-4 bg-white text-black text-sm font-bold tracking-wide rounded-full hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all duration-300 hover:-translate-y-1">
+                <span>Lihat Profil Saya</span>
+                <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform"></i>
+            </a>
+            <a href="#skills" class="group flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white text-sm font-bold tracking-wide rounded-full hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1">
+                <i data-lucide="code-2" class="w-4 h-4 text-brand-purple"></i>
+                <span>Keahlian Saya</span>
+            </a>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="flex items-center justify-center gap-8 sm:gap-16 mt-16" style="animation: reveal-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s both;">
+            <div class="text-center">
+                <div class="font-display font-medium text-3xl sm:text-4xl text-white" data-count="5">0+</div>
+                <div class="text-xs text-white/40 mt-1 tracking-wide">Keahlian Utama</div>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div class="text-center">
+                <div class="font-display font-medium text-3xl sm:text-4xl text-white" data-count="5">0+</div>
+                <div class="text-xs text-white/40 mt-1 tracking-wide">Proyek Praktik</div>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div class="text-center">
+                <div class="font-display font-medium text-3xl sm:text-4xl text-white" data-count="2">0+</div>
+                <div class="text-xs text-white/40 mt-1 tracking-wide">Penghargaan</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40" style="animation: reveal-up 1s ease 1.2s both;">
+        <span class="text-[10px] font-mono tracking-widest uppercase">Scroll</span>
+        <div class="w-5 h-8 rounded-full border border-white/30 flex items-start justify-center p-1.5">
+            <div class="w-1 h-2 rounded-full bg-white/60 animate-bounce"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+<!-- ===================== PROFILE SECTION ===================== -->
+<section id="profile" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20 animate-reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+                <i data-lucide="user" class="w-3.5 h-3.5 text-brand-purple"></i>
+                <span class="text-[11px] font-medium text-white/50 tracking-wider uppercase">Tentang Saya</span>
+            </div>
+            <h2 class="font-display font-medium text-4xl sm:text-5xl lg:text-6xl tracking-tighter gradient-text">Profil</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <!-- Left: Image + Quick Info -->
+            <div class="animate-reveal-left">
+                <div class="glass-card rounded-2xl p-8 text-center">
+                    <div class="profile-ring mb-6 mx-auto">
+                        <img src="https://i.ibb.co.com/xtR2g2jr/Gemini-Generated-Image-yxl3dyyxl3dyyxl3.png" alt="Fathir" class="profile-img" style="width:160px;height:160px;">
+                    </div>
+                    <h3 class="font-display font-medium text-xl text-white mb-1">Mochammad Fathir Reza Fahresi</h3>
+                    <p class="text-sm text-white/40 mb-6">Siswa TKJ — Kelas XI</p>
+
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <div class="bg-white/3 rounded-xl p-4 border border-white/5">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-brand-blue mx-auto mb-2"></i>
+                            <div class="text-[10px] text-white/40 uppercase tracking-wider mb-1">Sekolah</div>
+                            <div class="text-xs text-white/80 font-medium">SMK Plus Pelita Nusantara</div>
+                        </div>
+                        <div class="bg-white/3 rounded-xl p-4 border border-white/5">
+                            <i data-lucide="book-open" class="w-5 h-5 text-brand-purple mx-auto mb-2"></i>
+                            <div class="text-[10px] text-white/40 uppercase tracking-wider mb-1">Jurusan</div>
+                            <div class="text-xs text-white/80 font-medium">TKJ</div>
+                        </div>
+                        <div class="bg-white/3 rounded-xl p-4 border border-white/5">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-brand-cyan mx-auto mb-2"></i>
+                            <div class="text-[10px] text-white/40 uppercase tracking-wider mb-1">Kelas</div>
+                            <div class="text-xs text-white/80 font-medium">XI (Sebelas)</div>
+                        </div>
+                        <div class="bg-white/3 rounded-xl p-4 border border-white/5">
+                            <i data-lucide="target" class="w-5 h-5 text-green-400 mx-auto mb-2"></i>
+                            <div class="text-[10px] text-white/40 uppercase tracking-wider mb-1">Fokus</div>
+                            <div class="text-xs text-white/80 font-medium">Network Infra</div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="tooltip-tag"><i data-lucide="network" class="w-3 h-3 text-brand-blue"></i> Jaringan</span>
+                        <span class="tooltip-tag"><i data-lucide="server" class="w-3 h-3 text-brand-purple"></i> Server</span>
+                        <span class="tooltip-tag"><i data-lucide="cable" class="w-3 h-3 text-brand-cyan"></i> Fiber Optic</span>
+                        <span class="tooltip-tag"><i data-lucide="monitor" class="w-3 h-3 text-green-400"></i> Hardware</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: About Text + Timeline -->
+            <div class="animate-reveal-right">
+                <!-- About Text -->
+                <div class="glass-card rounded-2xl p-8 mb-6">
+                    <h3 class="font-display font-medium text-lg text-white mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-brand-purple/10 flex items-center justify-center">
+                            <i data-lucide="info" class="w-4 h-4 text-brand-purple"></i>
+                        </span>
+                        Tentang Saya
+                    </h3>
+                    <p class="text-sm text-white/50 leading-relaxed mb-4">
+                        Saya adalah siswa kelas XI di <span class="text-white/80 font-medium">SMK PLUS PELITA NUSANTARA</span> jurusan TKJ. Memiliki ketertarikan mendalam pada <span class="text-white/80 font-medium">infrastruktur jaringan, administrasi server, dan teknologi fiber optik</span>, serta terbiasa dengan pengerjaan proyek berbasis praktik maupun pemecahan masalah teknis.
+                    </p>
+                    <p class="text-sm text-white/50 leading-relaxed">
+                        Selain penguasaan teknis di bidang TKJ, saya memiliki pengalaman berorganisasi yang melatih kemampuan komunikasi, kerja sama tim, dan kedisiplinan. Saya selalu bersemangat untuk mempelajari teknologi/metode baru dan siap mengaplikasikan ilmu saya dalam lingkungan kerja profesional.
+                    </p>
+                </div>
+
+                <!-- Education Timeline -->
+                <div class="glass-card rounded-2xl p-8">
+                    <h3 class="font-display font-medium text-lg text-white mb-8 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-brand-blue/10 flex items-center justify-center">
+                            <i data-lucide="graduation-cap" class="w-4 h-4 text-brand-blue"></i>
+                        </span>
+                        Pendidikan
+                    </h3>
+                    <div class="relative pl-12">
+                        <div class="timeline-line"></div>
+                        <div class="relative mb-8">
+                            <div class="timeline-dot" style="top:6px;"></div>
+                            <div class="text-[10px] text-brand-purple font-mono tracking-wider uppercase mb-1">2023 — Sekarang</div>
+                            <h4 class="text-sm font-medium text-white mb-1">SMK PLUS PELITA NUSANTARA</h4>
+                            <p class="text-xs text-white/40">Jurusan Teknik Komputer & Jaringan (TKJ) — Kelas XI</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot" style="top:6px; background:#3b82f6; box-shadow:0 0 12px rgba(59,130,246,0.6);"></div>
+                            <div class="text-[10px] text-brand-blue font-mono tracking-wider uppercase mb-1">2020 — 2023</div>
+                            <h4 class="text-sm font-medium text-white mb-1">SMP</h4>
+                            <p class="text-xs text-white/40">Pendidikan Menengah Pertama</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+<!-- ===================== SKILLS SECTION ===================== -->
+<section id="skills" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20 animate-reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+                <i data-lucide="zap" class="w-3.5 h-3.5 text-brand-cyan"></i>
+                <span class="text-[11px] font-medium text-white/50 tracking-wider uppercase">Keahlian</span>
+            </div>
+            <h2 class="font-display font-medium text-4xl sm:text-5xl lg:text-6xl tracking-tighter gradient-text">Skill</h2>
+            <p class="text-base text-white/40 mt-4 max-w-lg mx-auto">Kemampuan teknis dan interpersonal yang saya kuasai melalui pembelajaran di sekolah dan praktik langsung.</p>
+        </div>
+
+        <!-- Hard Skills -->
+        <div class="mb-16">
+            <h3 class="font-display font-medium text-xl text-white mb-8 flex items-center gap-3 animate-reveal">
+                <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-purple/20 border border-brand-blue/20 flex items-center justify-center">
+                    <i data-lucide="cpu" class="w-5 h-5 text-brand-blue"></i>
+                </span>
+                Keahlian Teknis
+                <span class="text-xs text-white/30 font-sans font-normal">(Hard Skills)</span>
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Skill 1: MikroTik -->
+                <div class="glass-card rounded-2xl p-8 animate-reveal" style="transition-delay: 0.1s;">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="router" class="w-6 h-6 text-brand-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white text-base mb-1">Jaringan & MikroTik</h4>
+                            <p class="text-xs text-white/40 leading-relaxed">Konfigurasi MikroTik, Routing & Switching, manajemen bandwidth, dan firewall.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1.5"><span class="text-white/50">MikroTik RouterOS</span><span class="text-white/70 font-mono">85%</span></div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" style="--fill-width:85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1.5"><span class="text-white/50">Routing & Switching</span><span class="text-white/70 font-mono">80%</span></div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" style="--fill-width:80%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1.5"><span class="text-white/50">Fiber Optic (Splicing & OTDR)</span><span class="text-white/70 font-mono">75%</span></div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" style="--fill-width:75%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill 2: Server -->
+                <div class="glass-card rounded-2xl p-8 animate-reveal" style="transition-delay: 0.2s;">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="server" class="w-6 h-6 text-brand-purple"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white text-base mb-1">Administrasi Server</h4>
+                            <p class="text-xs text-white/40 leading-relaxed">Administrasi Server (Debian/Linux), Manajemen Repositori, dan deployment layanan jaringan.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1.5"><span class="text-white/50">Debian / Linux Server</span><span class="text-white/70 font-mono">78%</span></div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" style="--fill-width:78%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1.5"><span class="text-white/50">Web Server (Apache/Nginx)</span><span class="text-white/70 font-mono">72%</span></div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" style="--fill-width:72%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1.5"><span class="text-white/50">Manajemen Repositori</span><span class="text-white/70 font-mono">70%</span></div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" style="--fill-width:70%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="glass-card rounded-2xl p-8 mt-6 animate-reveal" style="transition-delay: 0.3s;">
+                <h4 class="text-sm font-medium text-white/70 mb-5 flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-4 h-4 text-brand-cyan"></i>
+                    Tools & Perangkat Lunak
+                </h4>
+                <div class="flex flex-wrap gap-3">
+                    <span class="tooltip-tag"><i data-lucide="globe" class="w-3 h-3 text-brand-blue"></i> Cisco Packet Tracer</span>
+                    <span class="tooltip-tag"><i data-lucide="box" class="w-3 h-3 text-brand-purple"></i> Winbox</span>
+                    <span class="tooltip-tag"><i data-lucide="file-text" class="w-3 h-3 text-brand-cyan"></i> Microsoft Office</span>
+                    <span class="tooltip-tag"><i data-lucide="terminal" class="w-3 h-3 text-green-400"></i> Linux Terminal</span>
+                    <span class="tooltip-tag"><i data-lucide="monitor" class="w-3 h-3 text-yellow-400"></i> OTDR</span>
+                    <span class="tooltip-tag"><i data-lucide="scissors" class="w-3 h-3 text-red-400"></i> Splicing Tool</span>
+                    <span class="tooltip-tag"><i data-lucide="cable" class="w-3 h-3 text-orange-400"></i> Crimping Tool</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="mb-20">
+            <h3 class="font-display font-medium text-xl text-white mb-8 flex items-center gap-3 animate-reveal">
+                <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-cyan/20 to-green-500/20 border border-brand-cyan/20 flex items-center justify-center">
+                    <i data-lucide="users" class="w-5 h-5 text-brand-cyan"></i>
+                </span>
+                Keahlian Interpersonal
+                <span class="text-xs text-white/30 font-sans font-normal">(Soft Skills)</span>
+            </h3>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-8 text-center animate-reveal" style="transition-delay:0.1s;">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center mx-auto mb-5">
+                        <i data-lucide="search" class="w-7 h-7 text-brand-blue"></i>
+                    </div>
+                    <h4 class="font-medium text-white text-sm mb-2">Troubleshooting</h4>
+                    <p class="text-xs text-white/40 leading-relaxed">Terbiasa mendiagnosis dan menyelesaikan kendala teknis secara sistematis dan efisien.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-8 text-center animate-reveal" style="transition-delay:0.2s;">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center mx-auto mb-5">
+                        <i data-lucide="message-circle" class="w-7 h-7 text-brand-purple"></i>
+                    </div>
+                    <h4 class="font-medium text-white text-sm mb-2">Kerja Sama Tim</h4>
+                    <p class="text-xs text-white/40 leading-relaxed">Pengalaman mengordinasikan proyek kelompok dan tugas organisasi dengan komunikasi efektif.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-8 text-center animate-reveal" style="transition-delay:0.3s;">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center mx-auto mb-5">
+                        <i data-lucide="clock" class="w-7 h-7 text-brand-cyan"></i>
+                    </div>
+                    <h4 class="font-medium text-white text-sm mb-2">Manajemen Waktu</h4>
+                    <p class="text-xs text-white/40 leading-relaxed">Mampu menyelesaikan tugas dan proyek sesuai tenggat waktu yang ditentukan dengan kedisiplinan tinggi.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery: Dokumentasi Praktik -->
+        <div>
+            <h3 class="font-display font-medium text-xl text-white mb-8 flex items-center gap-3 animate-reveal">
+                <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500/20 to-brand-cyan/20 border border-green-500/20 flex items-center justify-center">
+                    <i data-lucide="image" class="w-5 h-5 text-green-400"></i>
+                </span>
+                Dokumentasi Praktik
+            </h3>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Crimping -->
+                <div class="gallery-item animate-reveal-scale cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.1s;">
+                    <img src="https://i.ibb.co.com/CKNcwKqq/IMG-20260331-WA0001.jpg" alt="Crimping Cable" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <div class="text-[10px] text-brand-cyan font-mono tracking-wider uppercase mb-1">Praktik</div>
+                            <h4 class="font-medium text-white text-sm">Crimping Cable</h4>
+                            <p class="text-xs text-white/40 mt-1">Pemasangan konektor RJ-45 pada kabel UTP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="gallery-item animate-reveal-scale cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.2s;">
+                    <img src="https://i.ibb.co.com/3YrWYbpS/IMG-20251218-WA0014-3.jpg" alt="Troubleshooting" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <div class="text-[10px] text-brand-purple font-mono tracking-wider uppercase mb-1">Diagnosis</div>
+                            <h4 class="font-medium text-white text-sm">Troubleshooting</h4>
+                            <p class="text-xs text-white/40 mt-1">Diagnosa dan perbaikan masalah jaringan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Splicing FO -->
+                <div class="gallery-item animate-reveal-scale cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.3s;">
+                    <img src="https://i.ibb.co.com/whY5Q6xZ/IMG-20260606-WA0012.jpg" alt="Splicing Cable FO" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <div class="text-[10px] text-brand-blue font-mono tracking-wider uppercase mb-1">Fiber Optic</div>
+                            <h4 class="font-medium text-white text-sm">Splicing Cable FO</h4>
+                            <p class="text-xs text-white/40 mt-1">Penyambungan kabel fiber optik dengan fusion splicer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengecekan FO (same image, different label) -->
+                <div class="gallery-item animate-reveal-scale cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.4s;">
+                    <img src="https://i.ibb.co.com/whY5Q6xZ/IMG-20260606-WA0012.jpg" alt="Pengecekan Cable FO" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <div class="text-[10px] text-green-400 font-mono tracking-wider uppercase mb-1">Testing</div>
+                            <h4 class="font-medium text-white text-sm">Pengecekan Cable FO</h4>
+                            <p class="text-xs text-white/40 mt-1">Pengujian kualitas sambungan fiber optik</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Merakit PC -->
+                <div class="gallery-item animate-reveal-scale cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.5s;">
+                    <img src="https://i.ibb.co.com/hFPTh4h3/IMG-20260331-WA0004-1.jpg" alt="Merakit PC" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <div class="text-[10px] text-yellow-400 font-mono tracking-wider uppercase mb-1">Hardware</div>
+                            <h4 class="font-medium text-white text-sm">Merakit PC</h4>
+                            <p class="text-xs text-white/40 mt-1">Perakitan dan konfigurasi komputer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra placeholder for layout balance -->
+                <div class="gallery-item animate-reveal-scale" style="transition-delay:0.6s; background: rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; min-height:260px;">
+                    <div class="text-center p-6">
+                        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="plus" class="w-7 h-7 text-white/20"></i>
+                        </div>
+                        <p class="text-xs text-white/30">Dan masih banyak lagi dokumentasi praktik lainnya...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider max-w-4xl mx-auto"></div>
+
+<!-- ===================== ACHIEVEMENT SECTION ===================== -->
+<section id="achievement" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20 animate-reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+                <i data-lucide="trophy" class="w-3.5 h-3.5 text-yellow-400"></i>
+                <span class="text-[11px] font-medium text-white/50 tracking-wider uppercase">Penghargaan</span>
+            </div>
+            <h2 class="font-display font-medium text-4xl sm:text-5xl lg:text-6xl tracking-tighter gradient-text">Achievement</h2>
+            <p class="text-base text-white/40 mt-4 max-w-lg mx-auto">Pencapaian dan penghargaan yang telah saya raih selama perjalanan pendidikan di SMK.</p>
+        </div>
+
+        <!-- Achievement Cards -->
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Achievement 1 -->
+            <div class="achievement-card animate-reveal-left cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.1s;">
+                <div class="relative overflow-hidden">
+                    <img src="https://i.ibb.co.com/nXvRJSX/IMG-20260723-231009.jpg" alt="Penghargaan 1" loading="lazy">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-xl bg-yellow-400/20 border border-yellow-400/30 flex items-center justify-center backdrop-blur-sm">
+                        <i data-lucide="award" class="w-6 h-6 text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                        <span class="text-[10px] text-yellow-400 font-mono tracking-wider uppercase">Penghargaan</span>
+                    </div>
+                    <h3 class="font-display font-medium text-lg text-white mb-2">Sertifikat Penghargaan #1</h3>
+                    <p class="text-xs text-white/40 leading-relaxed">Pencapaian yang diperoleh sebagai bukti dedikasi dan kerja keras dalam bidang keahlian TKJ.</p>
+                </div>
+            </div>
+
+            <!-- Achievement 2 -->
+            <div class="achievement-card animate-reveal-right cursor-pointer" onclick="openLightbox(this)" style="transition-delay:0.2s;">
+                <div class="relative overflow-hidden">
+                    <img src="https://i.ibb.co.com/twbZ8n25/IMG-20260723-230938.jpg" alt="Penghargaan 2" loading="lazy">
+                    <div class="absolute top-4 right-4 w-12 h-12 rounded-xl bg-yellow-400/20 border border-yellow-400/30 flex items-center justify-center backdrop-blur-sm">
+                        <i data-lucide="award" class="w-6 h-6 text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                        <span class="text-[10px] text-yellow-400 font-mono tracking-wider uppercase">Penghargaan</span>
+                    </div>
+                    <h3 class="font-display font-medium text-lg text-white mb-2">Sertifikat Penghargaan #2</h3>
+                    <p class="text-xs text-white/40 leading-relaxed">Pengakuan atas kontribusi dan prestasi yang ditunjukkan selama proses pembelajaran dan praktik.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote / Motivasi -->
+        <div class="max-w-2xl mx-auto mt-20 text-center animate-reveal">
+            <div class="glass-card rounded-2xl p-10 relative overflow-hidden">
+                <div class="absolute top-4 left-6 text-6xl font-display text-white/5 leading-none">"</div>
+                <i data-lucide="quote" class="w-8 h-8 text-brand-purple/30 mx-auto mb-4"></i>
+                <p class="text-base text-white/60 italic leading-relaxed mb-4">
+                    "Teknologi bukan sekadar alat, tapi jembatan menuju masa depan. Setiap kabel yang saya sambung, setiap server yang saya konfigurasi, adalah satu langkah lebih dekat menuju profesional yang siap berkontribusi."
+                </p>
+                <div class="flex items-center justify-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-purple"></div>
+                    <span class="text-sm text-white/50 font-medium">Mochammad Fathir Reza Fahresi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="relative border-t border-white/5 py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue via-brand-purple to-brand-cyan flex items-center justify-center text-white font-display font-bold text-lg">F</div>
+                <div>
+                    <span class="font-display font-semibold text-white text-sm">Fathir<span class="text-brand-purple">.dev</span></span>
+                    <p class="text-[10px] text-white/30">SMK PLUS PELITA NUSANTARA — TKJ</p>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <div class="flex items-center gap-6">
+                <a href="#home" class="text-xs text-white/40 hover:text-white transition-colors">Home</a>
+                <a href="#profile" class="text-xs text-white/40 hover:text-white transition-colors">Profile</a>
+                <a href="#skills" class="text-xs text-white/40 hover:text-white transition-colors">Skill</a>
+                <a href="#achievement" class="text-xs text-white/40 hover:text-white transition-colors">Achievement</a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-xs text-white/20 font-mono">
+                © 2025 Fathir. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all z-10" onclick="closeLightbox()">
+        <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="Preview">
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed bottom-8 right-8 z-50 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-xl border border-white/10 text-sm text-white/80 flex items-center gap-3 opacity-0 translate-y-4 transition-all duration-300 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+    <span id="toast-msg">Gambar dibuka</span>
+</div>
+
+<script>
+// Initialize Lucide Icons
+lucide.createIcons();
+
+// ==================== PARTICLES BACKGROUND ====================
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: 0, y: 0 };
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.3 + 0.1;
+        this.color = ['59,130,246', '139,92,246', '6,182,212'][Math.floor(Math.random() * 3)];
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Mouse interaction
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+            const force = (150 - dist) / 150;
+            this.x -= (dx / dist) * force * 0.5;
+            this.y -= (dy / dist) * force * 0.5;
+        }
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+            this.reset();
+        }
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+// Create particles
+for (let i = 0; i < 80; i++) {
+    particles.push(new Particle());
+}
+
+function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(139, 92, 246, ${0.06 * (1 - dist / 120)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawConnections();
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ==================== NAVIGATION ====================
+const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section');
+const menuBtn = document.getElementById('menu-btn');
+const menuClose = document.getElementById('menu-close');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(3, 4, 11, 0.8)';
+        navbar.style.backdropFilter = 'blur(24px)';
+        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.borderBottom = 'none';
+    }
+
+    // Active nav link
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+        }
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === current) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Mobile menu
+function openMobileMenu() {
+    mobileMenu.classList.add('open');
+    mobileOverlay.style.opacity = '1';
+    mobileOverlay.style.pointerEvents = 'all';
+    document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    mobileOverlay.style.opacity = '0';
+    mobileOverlay.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
+}
+
+menuBtn.addEventListener('click', openMobileMenu);
+menuClose.addEventListener('click', closeMobileMenu);
+mobileOverlay.addEventListener('click', closeMobileMenu);
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+});
+
+// ==================== SCROLL REVEAL ====================
+const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -80px 0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+
+            // Animate skill bars
+            const skillBars = entry.target.querySelectorAll('.skill-bar-fill');
+            skillBars.forEach(bar => {
+                setTimeout(() => bar.classList.add('active'), 300);
+            });
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.animate-reveal, .animate-reveal-left, .animate-reveal-right, .animate-reveal-scale').forEach(el => {
+    observer.observe(el);
+});
+
+// ==================== COUNTER ANIMATION ====================
+const counterElements = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-count'));
+            let count = 0;
+            const duration = 1500;
+            const increment = target / (duration / 16);
+
+            const timer = setInterval(() => {
+                count += increment;
+                if (count >= target) {
+                    count = target;
+                    clearInterval(timer);
+                }
+                entry.target.textContent = Math.floor(count) + '+';
+            }, 16);
+
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+counterElements.forEach(el => counterObserver.observe(el));
+
+// ==================== LIGHTBOX ====================
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+function openLightbox(element) {
+    const img = element.querySelector('img');
+    if (img) {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        showToast('Klik di luar gambar untuk menutup');
+    }
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+// ==================== TOAST ====================
+const toast = document.getElementById('toast');
+const toastMsg = document.getElementById('toast-msg');
+let toastTimeout;
+
+function showToast(message) {
+    clearTimeout(toastTimeout);
+    toastMsg.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    toast.style.pointerEvents = 'auto';
+    toastTimeout = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(16px)';
+        toast.style.pointerEvents = 'none';
+    }, 2500);
+}
+
+// ==================== SMOOTH SCROLL for all anchor links ====================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
